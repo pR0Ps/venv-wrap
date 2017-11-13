@@ -1,0 +1,11 @@
+#!/bin/bash
+
+scriptdir=$(dirname "$(readlink -f "$0")")
+cmd=$(basename "$0")
+source "$scriptdir/$cmd/bin/activate"
+if [ $? -ne 0 ]; then
+	echo "couldn't enter the python virtual environment '$cmd'"
+	exit 255
+fi
+"$cmd" "$@"
+exit $?
